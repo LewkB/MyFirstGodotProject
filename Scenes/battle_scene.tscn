@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://10nbsp0ul5o5"]
+
+[ext_resource type="Script" path="res://Scripts/TurnManager.gd" id="1_sfnj6"]
+[ext_resource type="Texture2D" uid="uid://c4xh12w0o0lq8" path="res://Sprites/Warrior_Attack_11.png" id="1_yx0ce"]
+[ext_resource type="Resource" uid="uid://bhj8l526n26vx" path="res://Combat Actions/Slash.tres" id="3_grfqu"]
+[ext_resource type="PackedScene" uid="uid://u8f7vdl2k8y2" path="res://Scenes/Character.tscn" id="3_ksrnt"]
+[ext_resource type="Resource" uid="uid://crthy6v4abr76" path="res://Combat Actions/Heal.tres" id="4_0qrld"]
+[ext_resource type="Texture2D" uid="uid://d0kuun72rkkij" path="res://Sprites/Reptile.png" id="5_3qmhm"]
+[ext_resource type="Resource" uid="uid://ciolep2lfy35d" path="res://Combat Actions/Smite.tres" id="5_iwa3n"]
+[ext_resource type="Script" path="res://Scenes/PlayerUI.gd" id="8_s530s"]
+[ext_resource type="Script" path="res://Scenes/CombatActionButton.gd" id="8_wessd"]
+
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_char", "enemy_char")]
+script = ExtResource("1_sfnj6")
+player_char = NodePath("Player")
+enemy_char = NodePath("Enemy")
+
+[node name="Player" parent="." node_paths=PackedStringArray("opponent") instance=ExtResource("3_ksrnt")]
+position = Vector2(-200, -75)
+is_player = true
+combat_actions = [ExtResource("3_grfqu"), ExtResource("4_0qrld"), ExtResource("5_iwa3n")]
+opponent = NodePath("../Enemy")
+visual = ExtResource("1_yx0ce")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("opponent") instance=ExtResource("3_ksrnt")]
+position = Vector2(200, -75)
+combat_actions = [ExtResource("4_0qrld"), ExtResource("3_grfqu")]
+opponent = NodePath("../Player")
+visual = ExtResource("5_3qmhm")
+flip_visual = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+
+[node name="PlayerCombatActionsUI" type="VBoxContainer" parent="."]
+offset_left = -278.0
+offset_top = 33.0
+offset_right = -132.0
+offset_bottom = 169.0
+script = ExtResource("8_s530s")
+buttons = [NodePath("CombatAction"), NodePath("CombatAction2"), NodePath("CombatAction3"), NodePath("CombatAction4")]
+
+[node name="CombatAction" type="Button" parent="PlayerCombatActionsUI"]
+layout_mode = 2
+text = "Slash (5 dmg)"
+script = ExtResource("8_wessd")
+
+[node name="CombatAction2" type="Button" parent="PlayerCombatActionsUI"]
+layout_mode = 2
+text = "Slash (5 dmg)"
+script = ExtResource("8_wessd")
+
+[node name="CombatAction3" type="Button" parent="PlayerCombatActionsUI"]
+layout_mode = 2
+text = "Slash (5 dmg)"
+script = ExtResource("8_wessd")
+
+[node name="CombatAction4" type="Button" parent="PlayerCombatActionsUI"]
+layout_mode = 2
+text = "Slash (5 dmg)"
+script = ExtResource("8_wessd")
+
+[connection signal="pressed" from="PlayerCombatActionsUI/CombatAction" to="PlayerCombatActionsUI/CombatAction" method="_on_pressed"]
+[connection signal="pressed" from="PlayerCombatActionsUI/CombatAction2" to="PlayerCombatActionsUI/CombatAction2" method="_on_pressed"]
+[connection signal="pressed" from="PlayerCombatActionsUI/CombatAction3" to="PlayerCombatActionsUI/CombatAction3" method="_on_pressed"]
+[connection signal="pressed" from="PlayerCombatActionsUI/CombatAction4" to="PlayerCombatActionsUI/CombatAction4" method="_on_pressed"]
