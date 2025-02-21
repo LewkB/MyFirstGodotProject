@@ -18,7 +18,7 @@ func _ready():
 func begin_next_turn():
 	if cur_char == player_char:
 		cur_char = enemy_char
-		print("Player turn")
+		
 	elif cur_char == enemy_char:
 		cur_char = player_char
 		print("Enemy turn")

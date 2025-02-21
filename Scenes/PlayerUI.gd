@@ -12,6 +12,7 @@ func _on_character_begin_turn(character):
 	print(character)
 	visible = character.is_player
 	
+	##Girhub test
 	if character.is_player:
 		print("character.is_player")
 		_display_combat_actions(character.combat_actions)
