@@ -1,6 +1,8 @@
 extends Node2D
 class_name Character
 
+#Added for test pull
+
 @export var is_player : bool
 @export var cur_hp : int = 25
 @export var max_hp : int = 25
